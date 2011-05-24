@@ -1,0 +1,3 @@
+Project Euler solutions by Ali Ukani
+
+`.rkt` files are written in [Racket](http://racket-lang.org).
