@@ -27,7 +27,7 @@
      (define (do lst)
        (cond
          [(> (first lst) (floor (sqrt n))) lst]
-         [(cons (first lst)
+         [else (cons (first lst)
                 (do (filter (λ (i) (not (divides? i (first lst)))) lst)))]))]
     (do lst)))
 (check-expect (sieve 10) '(2 3 5 7))

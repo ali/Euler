@@ -19,7 +19,7 @@
 
 ;; sieve: [Listof Numbers] -> [Listof Primes]
 ;; Sieves a list of numbers for its primes
-(define (sieve lst)
+(define (sieve.v0 lst)
   (cond
     [(empty? lst) empty]
     [(cons? lst) (cons (first lst)
@@ -28,25 +28,34 @@
 (check-expect (sieve (get-candidates 10)) (list 2 3 5 7))
 
 
-;; greatest-prime: [Listof Primes] Number -> Number
-;; Returns the largest prime number
-(define (greatest-prime lst n)
-  (foldl max 1 (filter (λ (i) (divides? n i))
-                     lst)))
+;; sieve: Number -> [Listof Primes]
+;; Returns a list of all prime numbers from 2 to n
+;; Better sieve from Euler-10.rkt
+(define (sieve n)
+  (local
+    [(define lst (rest (build-list n add1)))
+     (define (do lst)
+       (cond
+         [(> (first lst) (floor (sqrt n))) lst]
+         [else (cons (first lst)
+                (do (filter (λ (i) (not (divides? i (first lst)))) lst)))]))]
+    (do lst)))
+(check-expect (sieve 10) '(2 3 5 7))
 
-(check-expect (greatest-prime (sieve (get-candidates 10)) 10) 5)
+;; gpf: Number -> Number
+;; Returns the largest prime factor of a given number.
+;; gpf = "Greatest Prime Factor"
+(define (gpf n)
+  (foldl max 0 (filter (λ (i) (divides? n i))
+                     (sieve n))))
+(check-expect (gpf 10) 5)
 
 ;; euler: Number -> Number
 ;; Takes a number and returns its greatest prime factor.
 (define (euler n)
   (greatest-prime (sieve (get-candidates (integer-sqrt n))) n))
 ;; Takes 42 minutes to find the greatest prime factor of the composite.
-;; Returns the correct number.
-
-;; euler.v2: Number -> Number
-;; Instead of going over the same lists multiple times,
-;;   I'm going to do it all in one shot.
-(define (euler.v2 n)))
+;; Returns the correct number. That kinda sucks.
 
 ;; Run
 (time (euler composite))
