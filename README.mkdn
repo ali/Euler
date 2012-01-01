@@ -1,3 +1,5 @@
 Project Euler solutions by Ali Ukani
 
+![](http://projecteuler.net/profile/AliUkani.png)
+
 `.rkt` files are written in [Racket](http://racket-lang.org).
