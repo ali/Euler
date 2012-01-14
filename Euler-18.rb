@@ -6,6 +6,8 @@
 
 # This solution works for both problems #18 and #67. I decided that in order to run this you need to either give it file (Euler-18.txt or Euler-67.txt in this repository) or the argument "example".
 
+require "test/unit"
+
 @example = [[3],
 			[7, 4],
 			[2, 4, 6],
@@ -19,6 +21,10 @@ def max (a, b)
 		return b
 	end
 end
+
+assert_equal(max(1, 0), 1)
+assert_equal(max(0, 1), 1)
+assert_equal(max(1, 1), 1)
 
 # Returns the largest sum of any path of a triangle
 def solve (triangle = example)
