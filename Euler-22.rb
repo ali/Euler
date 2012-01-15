@@ -5,7 +5,6 @@
 
 # Note: This problem wasn't interesting, so I took it as a chance
 # to learn more about the Ruby language (Files, Hashes, Enumerables...)
-# I 
 
 # Solves the Euler problem
 class Solution
